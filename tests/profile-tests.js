@@ -46,36 +46,117 @@ describe("Profile API", () => {
 
     describe("/companies", () => {
 
-        it("provides HVAC companies", done => {
-            api.companies.get("kaarina", "hvac")
-                .then(result => {
-                    expect(result.error).to.equal(null);
-                    expect(result.response.statusCode).to.equal(200);
+        it("provides company name and contact details", done => {
 
-                    const profiles = JSON.parse(result.body);
+            const hvacCompany = fake.hvacCompanyFromHelsinki();
 
-                    expect(profiles[0].name).to.equal("LVI-Wikström Oy");
-                })
-                .then(done)
-                .catch(error => {
-                    done(error || "failed");
-                });
+            helpers.storeCompany(hvacCompany).then(() =>
+
+                api.companies.get("helsinki", "hvac")
+                    .then(result => {
+                        expect(result.error).to.equal(null);
+                        expect(result.response.statusCode).to.equal(200);
+
+                        const profiles = JSON.parse(result.body);
+
+                        expect(profiles).to.have.lengthOf(1);
+                        expect(profiles[0].name).to.equal(hvacCompany.name);
+                        expect(profiles[0].phoneNumbers).to.deep.equal(hvacCompany.phoneNumbers);
+                        expect(profiles[0].websites).to.deep.equal(hvacCompany.websites);
+                        expect(profiles[0].addresses).to.deep.equal(hvacCompany.addresses);
+                    })
+                    .then(done)
+                    .catch(error => {
+                        done(error || "failed");
+                    })
+            );
         });
 
-        it("provides Electrician companies", done => {
-            api.companies.get("turku", "electrician")
-                .then(result => {
-                    expect(result.error).to.equal(null);
-                    expect(result.response.statusCode).to.equal(200);
+        it("filters data by municipality", done => {
 
-                    const profiles = JSON.parse(result.body);
+            const hvacCompany = fake.hvacCompanyFromHelsinki();
 
-                    expect(profiles[0].name).to.equal("Toikkatech Oy");
-                })
-                .then(done)
-                .catch(error => {
-                    done(error || "failed");
-                });
+            helpers.storeCompany(hvacCompany).then(() =>
+
+                api.companies.get("turku", "hvac")
+                    .then(result => {
+                        expect(result.error).to.equal(null);
+                        expect(result.response.statusCode).to.equal(200);
+
+                        const profiles = JSON.parse(result.body);
+
+                        expect(profiles).to.be.empty;
+                    })
+                    .then(done)
+                    .catch(error => {
+                        done(error || "failed");
+                    })
+            );
+        });
+
+        it("filters data by profession", done => {
+
+            const hvacCompany = fake.hvacCompanyFromHelsinki();
+
+            helpers.storeCompany(hvacCompany).then(() =>
+
+                api.companies.get("helsinki", "electrician")
+                    .then(result => {
+                        expect(result.error).to.equal(null);
+                        expect(result.response.statusCode).to.equal(200);
+
+                        const profiles = JSON.parse(result.body);
+
+                        expect(profiles).to.be.empty;
+                    })
+                    .then(done)
+                    .catch(error => {
+                        done(error || "failed");
+                    })
+            );
+        });
+
+        it("provides HVAC companies by municipality", done => {
+
+            const hvacCompany = fake.hvacCompanyFromHelsinki();
+
+            helpers.storeCompany(hvacCompany).then(() =>
+
+                api.companies.get("helsinki", "hvac")
+                    .then(result => {
+                        expect(result.error).to.equal(null);
+                        expect(result.response.statusCode).to.equal(200);
+
+                        const profiles = JSON.parse(result.body);
+
+                        expect(profiles).to.have.lengthOf(1);
+                    })
+                    .then(done)
+                    .catch(error => {
+                        done(error || "failed");
+                    })
+            );
+        });
+
+        it("provides Electrician companies by municipality", done => {
+
+            const electricianCompany = fake.electricianCompanyFromTurku();
+
+            helpers.storeCompany(electricianCompany).then(() =>
+                api.companies.get("turku", "electrician")
+                    .then(result => {
+                        expect(result.error).to.equal(null);
+                        expect(result.response.statusCode).to.equal(200);
+
+                        const profiles = JSON.parse(result.body);
+
+                        expect(profiles).to.have.lengthOf(1);
+                    })
+                    .then(done)
+                    .catch(error => {
+                        done(error || "failed");
+                    })
+            );
         });
     });
 });

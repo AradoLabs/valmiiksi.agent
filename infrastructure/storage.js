@@ -130,7 +130,6 @@ const findOne = (db, collectionName, query) => {
 
 const find = (db, collectionName, query) => {
     const options = {
-        // 'limit': 30,
         'sort': [['registrationDate', 'asc']]
     };
     return new Promise((resolve, reject) => {
