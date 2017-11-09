@@ -1,0 +1,21 @@
+{
+  "name": "valmiiksi.server",
+  "version": "0.0.0",
+  "description": "valmiiksi.fi",
+  "main": "infrastructure/server.js",
+  "scripts": {
+    "company-upkeep": "node infrastructure/company-upkeep.js",
+    "test": "mocha tests/profile-tests.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "chai": "^4.1.2",
+    "express": "^4.16.1",
+    "jsonwebtoken": "^8.0.1",
+    "mocha": "^4.0.0",
+    "mongodb": "^2.2.33",
+    "request": "^2.83.0"
+  }
+}
