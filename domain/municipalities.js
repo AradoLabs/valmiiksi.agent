@@ -318,7 +318,7 @@ const finnishMunicipalityNames = [
 ];
 
 const normalizeMunicipalityName = (municipalityName = "") =>
-    municipalityName.replace("å", "a").replace("ä","a").replace("ö","o").trim().toLowerCase();
+    municipalityName.trim().toLowerCase().replace(/å/g, '').replace(/ä/g,"a").replace(/ö/g,"o");
 
 const finnishMunicipalities = finnishMunicipalityNames.reduce((result, name) => {
     const normalizedName = normalizeMunicipalityName(name);

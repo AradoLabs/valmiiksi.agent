@@ -161,11 +161,11 @@ describe("Profile API", () => {
 
         it("supports special characters with umlauts", done => {
 
-            const hvacCompany = fake.hvacCompanyFromHämeenlinna();
+            const hvacCompany = fake.hvacCompanyFromÄänekoski();
 
             helpers.storeCompany(hvacCompany).then(() =>
 
-                api.companies.get("hämeenlinna", "hvac")
+                api.companies.get("äänekoski", "hvac")
                     .then(result => {
                         expect(result.error).to.equal(null);
                         expect(result.response.statusCode).to.equal(200);
@@ -183,11 +183,11 @@ describe("Profile API", () => {
 
         it("supports special characters without umlauts", done => {
 
-            const hvacCompany = fake.hvacCompanyFromHämeenlinna();
+            const hvacCompany = fake.hvacCompanyFromÄänekoski();
 
             helpers.storeCompany(hvacCompany).then(() =>
 
-                api.companies.get("hameenlinna", "hvac")
+                api.companies.get("äänekoski", "hvac")
                     .then(result => {
                         expect(result.error).to.equal(null);
                         expect(result.response.statusCode).to.equal(200);
