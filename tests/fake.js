@@ -34,7 +34,7 @@ const hvacCompanyFromHelsinki = () => companies.CompanyProfile(
     updated = new Date()
 );
 
-const hvacCompanyFromÄänekoski = () => profiles.CompanyProfile(
+const hvacCompanyFromÄänekoski = () => companies.CompanyProfile(
     businessID = "11111",
     name = "Another  HVAC Company",
     registrationDate = new Date("2016-12-24"),
