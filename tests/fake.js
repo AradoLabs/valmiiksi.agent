@@ -1,5 +1,6 @@
 const users = require("../domain/users");
 const profiles = require("../domain/profiles");
+const companies = require("../domain/companies");
 
 const customer = () => users.customer(
     username = "jdoe",
@@ -9,7 +10,7 @@ const customer = () => users.customer(
     telephone = "0401234567"
 );
 
-const electricianCompanyFromTurku = () => profiles.CompanyProfile(
+const electricianCompanyFromTurku = () => companies.CompanyProfile(
     businessID = "12345",
     name = "Example Electrician Company",
     registrationDate = new Date("2015-12-24"),
@@ -21,7 +22,7 @@ const electricianCompanyFromTurku = () => profiles.CompanyProfile(
     updated = new Date()
 );
 
-const hvacCompanyFromHelsinki = () => profiles.CompanyProfile(
+const hvacCompanyFromHelsinki = () => companies.CompanyProfile(
     businessID = "67890",
     name = "Example HVAC Company",
     registrationDate = new Date("2016-12-24"),

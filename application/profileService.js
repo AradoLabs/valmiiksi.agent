@@ -1,5 +1,6 @@
 const municipalities = require('../domain/municipalities');
 const profiles = require('../domain/profiles');
+const companies = require('../domain/companies');
 const storage = require('../infrastructure/storage');
 
 const findPersonProfiles = (municipalityName, professionName) => {
@@ -14,7 +15,7 @@ const findPersonProfiles = (municipalityName, professionName) => {
 };
 
 const findCompanyProfiles = (municipalityName, profession) => {
-    const businessLineCode = profiles.parseBusinessLineCode(profession);
+    const businessLineCode = companies.parseBusinessLineCode(profession);
     const municipality = municipalities.findMunicipality(municipalityName).name.toUpperCase();
 
     const toPresentationCompanyProfile = storedObject => ({
