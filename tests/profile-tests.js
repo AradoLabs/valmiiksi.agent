@@ -143,7 +143,51 @@ describe("Profile API", () => {
             const electricianCompany = fake.electricianCompanyFromTurku();
 
             helpers.storeCompany(electricianCompany).then(() =>
-                api.companies.get("turku", "electrician")
+                api.companies.get("Turku", "electrician")
+                    .then(result => {
+                        expect(result.error).to.equal(null);
+                        expect(result.response.statusCode).to.equal(200);
+
+                        const profiles = JSON.parse(result.body);
+
+                        expect(profiles).to.have.lengthOf(1);
+                    })
+                    .then(done)
+                    .catch(error => {
+                        done(error || "failed");
+                    })
+            );
+        });
+
+        it("supports special characters with umlauts", done => {
+
+            const hvacCompany = fake.hvacCompanyFromÄänekoski();
+
+            helpers.storeCompany(hvacCompany).then(() =>
+
+                api.companies.get("äänekoski", "hvac")
+                    .then(result => {
+                        expect(result.error).to.equal(null);
+                        expect(result.response.statusCode).to.equal(200);
+
+                        const profiles = JSON.parse(result.body);
+
+                        expect(profiles).to.have.lengthOf(1);
+                    })
+                    .then(done)
+                    .catch(error => {
+                        done(error || "failed");
+                    })
+            );
+        });
+
+        it("supports special characters without umlauts", done => {
+
+            const hvacCompany = fake.hvacCompanyFromÄänekoski();
+
+            helpers.storeCompany(hvacCompany).then(() =>
+
+                api.companies.get("äänekoski", "hvac")
                     .then(result => {
                         expect(result.error).to.equal(null);
                         expect(result.response.statusCode).to.equal(200);

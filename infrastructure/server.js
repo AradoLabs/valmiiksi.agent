@@ -15,11 +15,11 @@ const start = () => new Promise((resolve, reject) => {
 
     storage.connect().then(() => {
         server = app.listen(config.tcpPort, resolve);
+        
+        console.log("%s listening on port %i", appName, config.tcpPort);
+    
+        return resolve(server);
     });
-
-    console.log("%s listening on port %i", appName, config.tcpPort);
-
-    return resolve(server);
 });
 
 const stop = done => {

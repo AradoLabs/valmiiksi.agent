@@ -1,9 +1,10 @@
 {
-  "name": "valmiiksi.server",
-  "version": "0.0.0",
+  "name": "valmiiksi.agent",
+  "version": "1.0.0",
   "description": "valmiiksi.fi",
   "main": "infrastructure/server.js",
   "scripts": {
+    "start": "node infrastructure/server.js",
     "company-upkeep": "node infrastructure/company-upkeep.js",
     "test": "mocha tests/profile-tests.js"
   },
