@@ -35,7 +35,7 @@ const api = {
                     method: 'GET'
                 };
                 
-                request(getRequest, (error, response, body) => {
+                return request(getRequest, (error, response, body) => {
                     return resolve({
                         error: error,
                         response: response,
