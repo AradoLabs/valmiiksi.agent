@@ -26,7 +26,7 @@ const storeCompany = company => {
     const storage = require('../infrastructure/storage');
 
     return storage.connect().then(connection => {
-        connection.companies.insertOrUpdate(company);
+        return connection.companies.insertOrUpdate(company);
     });
 };
 
