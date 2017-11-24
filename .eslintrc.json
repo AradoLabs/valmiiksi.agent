@@ -7,6 +7,9 @@
         }
     },
     "rules": {
-        "semi": 2
+        "semi": 2,
+        "quotes": [2, "double"],
+        "consistent-return": 2,
+        "callback-return": 2
     }
 }

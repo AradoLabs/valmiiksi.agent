@@ -119,7 +119,7 @@ describe("Profile API", () => {
         it("provides HVAC companies by municipality", done => {
 
             const hvacCompany = fake.hvacCompanyFromHelsinki();
-
+            
             helpers.storeCompany(hvacCompany).then(() =>
 
                 api.companies.get("helsinki", "hvac")
