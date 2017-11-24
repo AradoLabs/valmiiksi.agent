@@ -3,4 +3,3 @@
 
 HTTP based agent for https://valmiiksi.fi
 
-*Copyright (C) 2017 Timo Vilppu*
